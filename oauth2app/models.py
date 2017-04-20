@@ -56,7 +56,7 @@ class KeyGenerator(object):
         self.length = length
 
     def __call__(self):
-        return sha512(uuid4().hex).hexdigest()[0:self.length]
+        return sha512(uuid4().hex.encode()).hexdigest()[0:self.length]
 
 
 class Client(models.Model):
