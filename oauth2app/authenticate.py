@@ -230,7 +230,6 @@ class Authenticator(object):
 
     def error_response(self,
             content='',
-            mimetype=None,
             content_type=settings.DEFAULT_CONTENT_TYPE):
         """Error response generator. Returns a Django HttpResponse with status
         401 and the approproate headers set. See Django documentation for details.
@@ -239,13 +238,11 @@ class Authenticator(object):
         **Kwargs:**
 
         * *content:* See Django docs. *Default ''*
-        * *mimetype:* See Django docs. *Default None*
         * *content_type:* See Django docs. *Default DEFAULT_CONTENT_TYPE*
 
         """
         response = HttpResponse(
             content=content,
-            mimetype=mimetype,
             content_type=content_type)
         if not self.attempted_validation:
             response['WWW-Authenticate'] = 'Bearer realm="%s"' % REALM
