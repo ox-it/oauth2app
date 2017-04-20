@@ -251,7 +251,7 @@ class Authenticator(object):
         else:
             if self.error is not None:
                 error = getattr(self.error, "error", "invalid_request")
-                error_description = self.error.message
+                error_description = str(self.error)
             else:
                 error = "invalid_request"
                 error_description = "Invalid Request."
@@ -313,12 +313,12 @@ class JSONAuthenticator(Authenticator):
         """Returns a HttpResponse object of JSON error data."""
         if self.error is not None:
             content = json.dumps({
-                "error":getattr(self.error, "error", "invalid_request"),
-                "error_description":self.error.message})
+                "error": getattr(self.error, "error", "invalid_request"),
+                "error_description": str(self.error)})
         else:
             content = ({
-                "error":"invalid_request",
-                "error_description":"Invalid Request."})
+                "error": "invalid_request",
+                "error_description": "Invalid Request."})
         if self.callback is not None:
             content = "%s(%s);" % (self.callback, content)
         response = Authenticator.error_response(
