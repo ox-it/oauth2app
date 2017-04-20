@@ -291,7 +291,7 @@ class JSONAuthenticator(Authenticator):
         Authenticator.__init__(self, scope=scope)
 
     def validate(self, request):
-        self.callback = request.REQUEST.get('callback')
+        self.callback = request.POST.get('callback', request.GET.get('callback'))
         return Authenticator.validate(self, request)
 
     def response(self, data):
