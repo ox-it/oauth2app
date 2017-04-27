@@ -236,7 +236,7 @@ class Authorizer(object):
             e = self.error
         else:
             e = AccessDenied("Access Denied.")
-        parameters = {'error': e.error, 'error_description': u'%s' % e.message}
+        parameters = {'error': e.error, 'error_description': u'%s' % str(e)}
         if self.state is not None:
             parameters['state'] = self.state
         redirect_uri = self.redirect_uri
