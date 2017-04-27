@@ -5,7 +5,6 @@
 
 
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
-from .url_normalize import url_normalize
  
  
 def add_parameters(url, parameters):
@@ -34,15 +33,3 @@ def add_fragments(url, fragments):
     parts = list(urlparse(url))
     parts[5] = urlencode(parse_qsl(parts[5]) + fragments.items())
     return urlunparse(parts)
-    
-    
-def normalize(url):
-    """Normalizes URL.
-
-    **Args:**
-
-    * *url:* URL string.
-
-    *Returns str*"""
-    return url_normalize(url)
-    
